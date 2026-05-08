@@ -20,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 let latestData = [];
 const sseClients = new Set();
 
-// Notion's built-in select option colors -> CSS
 const NOTION_COLORS = {
   default: '#e2e8f0',
   gray:    '#94a3b8',
@@ -43,14 +42,6 @@ const TERRAIN_COLORS = {
   scrublands: '#b07d45',
   swamp:      '#4a6741',
 };
-
-function resolveColor(selectProp) {
-  if (!selectProp?.select) return NOTION_COLORS.default;
-  const name = (selectProp.select.name ?? '').trim();
-  // Use name directly if it looks like a CSS hex color
-  if (/^#[0-9a-fA-F]{3,8}$/.test(name)) return name;
-  return NOTION_COLORS[selectProp.select.color] ?? NOTION_COLORS.default;
-}
 
 function getPropText(prop) {
   if (!prop) return '';
@@ -75,15 +66,15 @@ function extractHex(page) {
   const q = props.x_coordinate?.number ?? 0;
   const r = props.y_coordinate?.number ?? 0;
 
-  const terrain        = getPropText(props['terrain'] ?? props['Terrain']);
-  const color = TERRAIN_COLORS[terrain.toLowerCase()] ?? resolveColor(props.Color ?? props.color);
+  const terrain        = getPropText(props['terrain']);
+  const color = TERRAIN_COLORS[terrain.toLowerCase()];
 
-  const faction      = getPropText(props['faction'] ?? props['Faction']);
-  const factionColor = getPropText(props['faction_colour'] ?? props['faction_color']) || null;
+  const faction      = getPropText(props['faction']);
+  const factionColor = getPropText(props['faction_colour']);
 
   const tileId         = getPropText(props['tile_id']);
-  const name           = getPropText(props['name'] ?? props['Name']);
-  const description    = getPropText(props['description'] ?? props['Description']);
+  const name           = getPropText(props['name']);
+  const description    = getPropText(props['description']);
   const logNumber      = getPropText(props['log_number']);
   const carto1         = getPropText(props['cartogropher_name_1']);
   const carto2         = getPropText(props['cartogropher_name_2']);
@@ -96,7 +87,7 @@ function extractHex(page) {
   return {
     id: page.id,
     q, r,
-    label: tileId || logNumber || '?',
+    label: tileId,
     color,
     terrain,
     faction,
@@ -159,7 +150,6 @@ app.get('/events', (req, res) => {
     'Connection':      'keep-alive',
     'X-Accel-Buffering': 'no',
   });
-  // Send current state immediately on connect
   res.write(`data: ${JSON.stringify(latestData)}\n\n`);
   sseClients.add(res);
   req.on('close', () => sseClients.delete(res));

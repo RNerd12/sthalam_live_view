@@ -1,8 +1,8 @@
 'use strict';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const HEX_SIZE    = 48;        // circumradius in px
-const HEX_SPACING = 1.1;       // >1 adds gaps between hexes
+const HEX_SIZE    = 48;
+const HEX_SPACING = 1.1;
 const SQRT3 = Math.sqrt(3);
 
 // ── Hex math (axial coordinates, pointy-top orientation) ──────────────────
@@ -17,7 +17,7 @@ function axialToPixel(q, r) {
 function hexPoints(cx, cy) {
   const pts = [];
   for (let i = 0; i < 6; i++) {
-    const a = Math.PI / 180 * (60 * i - 30); // pointy-top starts at -30°
+    const a = Math.PI / 180 * (60 * i - 30);
     pts.push(`${(cx + HEX_SIZE * Math.cos(a)).toFixed(2)},${(cy + HEX_SIZE * Math.sin(a)).toFixed(2)}`);
   }
   return pts.join(' ');
@@ -191,7 +191,6 @@ function renderHexes(data) {
     const tc = textColorFor(hex.color);
 
     if (hexEls.has(hex.id)) {
-      // Update existing element (only visual properties)
       const g = hexEls.get(hex.id);
       const poly = g.querySelector('polygon.terrain-fill');
       poly.setAttribute('fill', hex.color);
@@ -202,7 +201,6 @@ function renderHexes(data) {
       const newLbl = buildHexLabel(x, y, hex, tc);
       if (newLbl) g.appendChild(newLbl);
     } else {
-      // Build new <g>
       const g = document.createElementNS(SVG_NS, 'g');
       g.classList.add('hex-cell');
       if (hex.notionUrl) g.style.cursor = 'pointer';
@@ -241,7 +239,7 @@ function renderHexes(data) {
 // ── Tooltip ───────────────────────────────────────────────────────────────
 
 function showTooltip(e, hex) {
-  let html = `<div class="tooltip-title">${escHtml(hex.name || hex.tileId || '(untitled)')}</div>`;
+  let html = `<div class="tooltip-title">${escHtml(hex.name || 'hex #' + hex.tileId || '(untitled)')}</div>`;
   if (hex.logNumber)  html += row('Log #',   escHtml(hex.logNumber));
   (hex.cartographers ?? []).forEach((c, i) => {
     html += row(`Cartographer ${i + 1}`, escHtml(c));

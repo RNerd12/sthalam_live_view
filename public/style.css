@@ -19,7 +19,6 @@ html, body {
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* ── Header ── */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -66,7 +65,6 @@ html, body {
   50%       { opacity: 0.35; }
 }
 
-/* ── Map ── */
 .map-container {
   position: fixed;
   top: 52px; left: 0; right: 0; bottom: 0;
@@ -80,12 +78,10 @@ html, body {
 }
 #map:active { cursor: grabbing; }
 
-/* Hex cells */
 .hex-cell { transition: filter 0.12s; }
 .hex-cell:hover { filter: brightness(1.25); }
 .hex-cell polygon { transition: fill 0.35s ease; }
 
-/* ── Tooltip ── */
 .tooltip {
   position: fixed;
   z-index: 30;
@@ -116,7 +112,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ── Controls ── */
 .controls {
   position: fixed;
   bottom: 20px;
@@ -143,7 +138,6 @@ html, body {
 }
 .controls button:hover { background: var(--border); }
 
-/* ── Empty state ── */
 .empty-label {
   fill: var(--muted);
   font-size: 14px;
