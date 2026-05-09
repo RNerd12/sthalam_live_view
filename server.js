@@ -38,12 +38,13 @@ const TERRAIN_COLORS = {
   plains:     '#9bd465',
   forest:     '#2d7a45',
   jungle:     '#1a5c2a',
-  city:       '#71797e',
+  city:       '#935ac2',
   coast:      '#1e90c8',
   scrublands: '#b07d45',
   swamp:      '#4a6741',
   desert:     '#e9c865',
   hills:      '#dba155',
+  mountains:  '#8b8c8c',
 };
 
 function getPropText(prop) {
