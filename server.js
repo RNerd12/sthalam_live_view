@@ -45,6 +45,7 @@ const TERRAIN_COLORS = {
   desert:     '#e9c865',
   hills:      '#dba155',
   mountains:  '#8b8c8c',
+  lake:       '#1e2fc8',
 };
 
 function getPropText(prop) {
