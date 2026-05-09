@@ -35,13 +35,15 @@ const NOTION_COLORS = {
 };
 
 const TERRAIN_COLORS = {
-  plains:     '#c9b84c',
+  plains:     '#9bd465',
   forest:     '#2d7a45',
   jungle:     '#1a5c2a',
   city:       '#71797e',
   coast:      '#1e90c8',
   scrublands: '#b07d45',
   swamp:      '#4a6741',
+  desert:     '#e9c865',
+  hills:      '#dba155',
 };
 
 function getPropText(prop) {
