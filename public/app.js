@@ -5,19 +5,19 @@ const HEX_SIZE    = 48;
 const HEX_SPACING = 1.1;
 const SQRT3 = Math.sqrt(3);
 
-// ── Hex math (axial coordinates, pointy-top orientation) ──────────────────
+// ── Hex math (axial coordinates, flat-top orientation) ────────────────────
 
 function axialToPixel(q, r) {
   return {
-    x: HEX_SIZE * HEX_SPACING * (SQRT3 * q + SQRT3 / 2 * r),
-    y: HEX_SIZE * HEX_SPACING * (3 / 2 * r),
+    x: HEX_SIZE * HEX_SPACING * (3 / 2 * q),
+    y: HEX_SIZE * HEX_SPACING * (SQRT3 / 2 * q + SQRT3 * r),
   };
 }
 
 function hexPoints(cx, cy) {
   const pts = [];
   for (let i = 0; i < 6; i++) {
-    const a = Math.PI / 180 * (60 * i - 30);
+    const a = Math.PI / 180 * (60 * i);
     pts.push(`${(cx + HEX_SIZE * Math.cos(a)).toFixed(2)},${(cy + HEX_SIZE * Math.sin(a)).toFixed(2)}`);
   }
   return pts.join(' ');
@@ -127,7 +127,7 @@ document.getElementById('btn-reset').addEventListener('click', () => {
 // ── Hex rendering ─────────────────────────────────────────────────────────
 
 function buildHexLabel(x, y, hex, tc) {
-  const lines = [hex.terrain, hex.coords].filter(Boolean);
+  const lines = [hex.name || hex.terrain].filter(Boolean);
   if (!lines.length) return null;
   const fontSize   = HEX_SIZE * 0.22;
   const lineHeight = HEX_SIZE * 0.27;
