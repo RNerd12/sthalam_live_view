@@ -13,6 +13,7 @@ if (!process.env.NOTION_TOKEN || !process.env.NOTION_DATABASE_ID) {
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const PUBLISHED_SITE = 'https://exultant-harmony-6dd.notion.site';
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -102,7 +103,7 @@ function extractHex(page) {
     tileBack,
     recipe,
     hexFlowerState,
-    notionUrl: page.url,
+    notionUrl: page.url.replace('https://www.notion.so', PUBLISHED_SITE),
   };
 }
 
