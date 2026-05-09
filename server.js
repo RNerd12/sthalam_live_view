@@ -35,17 +35,17 @@ const NOTION_COLORS = {
 };
 
 const TERRAIN_COLORS = {
-  plains:     '#9bd465',
-  forest:     '#2d7a45',
-  jungle:     '#1a5c2a',
-  city:       '#935ac2',
-  coast:      '#1e90c8',
-  scrublands: '#b07d45',
-  swamp:      '#4a6741',
-  desert:     '#e9c865',
-  hills:      '#dba155',
-  mountains:  '#8b8c8c',
-  lake:       '#1e2fc8',
+  plains:     '#a8d85a',
+  forest:     '#2e8b57',
+  jungle:     '#005c2e',
+  city:       '#7b3fb5',
+  coast:      '#00b4cc',
+  scrublands: '#c4652d',
+  swamp:      '#6b7c3a',
+  desert:     '#f2c94c',
+  hills:      '#c8956a',
+  mountains:  '#8a9aaa',
+  lake:       '#1a3a8f',
 };
 
 function getPropText(prop) {

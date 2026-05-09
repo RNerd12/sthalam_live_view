@@ -127,9 +127,9 @@ document.getElementById('btn-reset').addEventListener('click', () => {
 // ── Hex rendering ─────────────────────────────────────────────────────────
 
 function buildHexLabel(x, y, hex, tc) {
-  const lines = [hex.name || hex.terrain, `${hex.q},${hex.r}`].filter(Boolean);
-  const fontSize   = HEX_SIZE * 0.22;
-  const lineHeight = HEX_SIZE * 0.27;
+  const lines = [hex.cartographers?.[0] || hex.name, `${hex.q},${hex.r}`].filter(Boolean);
+  const fontSize   = HEX_SIZE * 0.19;
+  const lineHeight = HEX_SIZE * 0.24;
   const startY     = y - lineHeight * (lines.length - 1) / 2;
   const text = document.createElementNS(SVG_NS, 'text');
   text.setAttribute('text-anchor', 'middle');
@@ -144,7 +144,7 @@ function buildHexLabel(x, y, hex, tc) {
     tspan.setAttribute('y', startY + i * lineHeight);
     const isCoord = i === lines.length - 1;
     tspan.setAttribute('font-weight', i === 0 ? '700' : '400');
-    if (isCoord) tspan.setAttribute('font-size', `${HEX_SIZE * 0.18}px`);
+    if (isCoord) tspan.setAttribute('font-size', `${HEX_SIZE * 0.15}px`);
     tspan.setAttribute('opacity', isCoord ? '0.65' : '1');
     tspan.textContent = line;
     text.appendChild(tspan);
